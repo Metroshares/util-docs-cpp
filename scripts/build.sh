@@ -96,7 +96,7 @@ if [ ! -d "$PATH_OUTPUT/$VERSION" ]; then
   mkdir $PATH_OUTPUT/$VERSION
 fi
 
-cp -R $PATH_BUILD/gitbook/_book/. $PATH_OUTPUT/$VERSION
+cp -R $PATH_BUILD/gitbook/. $PATH_OUTPUT/$VERSION
 
 # cp $PATH_CONFIG/theme/index.html ./index.html
 
