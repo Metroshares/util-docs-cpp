@@ -2,10 +2,11 @@
 
 ABS_PATH=$(pwd)
 # Positionals
-VERSION=$(git describe --tags)
-VERSION=${VERSION:1}
 PATH_CONFIG=${2-"$ABS_PATH/.docs"}
 PATH_BUILD=${3-"$ABS_PATH/tmp"}
+
+VERSION=$(git describe --tags)
+VERSION=${VERSION:1}
 
 PATH_OUTPUT="docs"
 
@@ -96,7 +97,7 @@ if [ -d "$PATH_OUTPUT/$VERSION" ]; then
   mkdir $PATH_OUTPUT/$VERSION
 fi
 
-cp $PATH_BUILD/gitbook/_book $PATH_OUTPUT/$VERSION
+cp -R $PATH_BUILD/gitbook/_book $PATH_OUTPUT/$VERSION
 
 # cp $PATH_CONFIG/theme/index.html ./index.html
 
