@@ -36,7 +36,8 @@ echo $PY_VER_MAJOR
 if [ "$PY_VER_MAJOR" != "3" ]; then
   echo "Python version is not 3"
   {
-    python3 --version
+    PYTHON3_INSTALLED=$(python3 --version)
+    echo "Python3 installed ($PYTHON3_INSTALLED)"
   } || {
     echo "Python3 not installed, please install python3"
     exit
