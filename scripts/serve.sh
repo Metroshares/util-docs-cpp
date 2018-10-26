@@ -11,4 +11,4 @@ PATH_SERVE=$PATH_OUTPUT/$VERSION #path to build directory
 
 echo "Serving $VERSION from $PATH_SERVE"
 
-$PATH_CONFIG/node_modules/.bin/gitbook serve $PATH_SERVE/gitbook
+$PATH_CONFIG/node_modules/.bin/gitbook serve $PATH_SERVE
