@@ -14,7 +14,11 @@ if [ -d "$PATH_BUILD" ]; then
   rm -fr $PATH_BUILD
 fi
 
+mkdir $PATH_BUILD
+mkrdir $PATH_BUILD/gitbook
+
 cp SUMMARY.md $PATH_BUILD/gitbook/SUMMARY.md
+cp README.md $PATH_BUILD/gitbook/README.md
 
 {
   doxygen &&
