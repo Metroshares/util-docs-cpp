@@ -29,7 +29,9 @@ cp README.md $PATH_BUILD/gitbook/README.md
 
 PY_VER=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
 PY_VER_SEM=( ${PY_VER//./ } )
-PY_VER_MAJOR=${PY_VER%.*.*}
+PY_VER_MAJOR=${PY_VER_SEM[0]}
+
+echo $PY_VER_MAJOR
 
 if("$PY_VER_MAJOR" != "3"); then
   echo "Python version is not 3"
