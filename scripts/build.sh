@@ -15,7 +15,7 @@ if [ -d "$PATH_BUILD" ]; then
 fi
 
 mkdir $PATH_BUILD
-mkrdir $PATH_BUILD/gitbook
+mkdir $PATH_BUILD/gitbook
 
 cp SUMMARY.md $PATH_BUILD/gitbook/SUMMARY.md
 cp README.md $PATH_BUILD/gitbook/README.md
