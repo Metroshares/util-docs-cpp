@@ -20,16 +20,25 @@ cp SUMMARY.md $PATH_BUILD/gitbook/SUMMARY.md
 cp README.md $PATH_BUILD/gitbook/README.md
 
 {
-  doxygen &&
+  doxygen
+} || {
+  echo "Doxygen is not installed. Install and try again. Exiting now."
+  exit
+
+}
+
+PY_VER=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
+PY_VER_SEM=( ${PY_VER//./ } )
+PY_VER_MAJOR=${PY_VER%.*.*}
+
+if(PY_VER_MAJOR != "3") {
   python3 -m venv ~/.virtualenvs/myvenv
   source ~/.virtualenvs/myvenv/bin/activate
-  which python
-  doxybook -i $PATH_BUILD/xml -o $PATH_BUILD/gitbook -s $PATH_BUILD/gitbook/SUMMARY.md -t gitbook
-  deactivate
-} || {
-  echo "Doxygen or Doxybook was not installed. Install both and try again. Exiting now."
-  exit
 }
+
+doxybook -i $PATH_BUILD/xml -o $PATH_BUILD/gitbook -s $PATH_BUILD/gitbook/SUMMARY.md -t gitbook
+deactivate
+
 
 if [ -d "$PATH_STATIC" ]; then
   ## copy static files into gitbook before
