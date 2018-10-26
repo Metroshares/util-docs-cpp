@@ -1,6 +1,14 @@
 ABS_PATH=$(pwd)
 PATH_CONFIG=$ABS_PATH/.docs
 # Positional
-PATH_SERVE=${1-"$ABS_PATH/tmp"} #path to build directory
+
+PATH_OUTPUT="docs"
+
+VERSION=$(git describe --tags)
+VERSION=${VERSION:1}
+
+PATH_SERVE=$PATH_OUTPUT/$VERSION #path to build directory
+
+echo "Serving $VERSION from $PATH_SERVE"
 
 $PATH_CONFIG/node_modules/.bin/gitbook serve $PATH_SERVE/gitbook

@@ -5,10 +5,9 @@ ABS_PATH=$(pwd)
 PATH_CONFIG=${2-"$ABS_PATH/.docs"}
 PATH_BUILD=${3-"$ABS_PATH/tmp"}
 
+PATH_OUTPUT="docs"
 VERSION=$(git describe --tags)
 VERSION=${VERSION:1}
-
-PATH_OUTPUT="docs"
 
 if !VERSION; then
   echo "version must be set."
