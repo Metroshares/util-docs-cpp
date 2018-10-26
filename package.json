@@ -1,0 +1,16 @@
+{
+  "name": "eosio-book-ts",
+  "version": "0.0.1",
+  "main": "README.md",
+  "scripts": {},
+  "author": "Block.One",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EOSIO/eosio-book-ts"
+  },
+  "dependencies": {
+    "gitbook-cli": "2.3.2"
+  },
+  "devDependencies": {}
+}
