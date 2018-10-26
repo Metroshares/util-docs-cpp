@@ -33,7 +33,7 @@ PY_VER_MAJOR=${PY_VER_SEM[0]}
 
 echo $PY_VER_MAJOR
 
-if("$PY_VER_MAJOR" != "3"); then
+if $PY_VER_MAJOR != 3; then
   echo "Python version is not 3"
   {
     python3 --version
