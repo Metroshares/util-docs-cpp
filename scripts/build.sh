@@ -32,13 +32,24 @@ PY_VER_SEM=( ${PY_VER//./ } )
 PY_VER_MAJOR=${PY_VER%.*.*}
 
 if("$PY_VER_MAJOR" != "3"); then
+  echo "Python version is not 3"
+  {
+    python3 --version
+  } || {
+    echo "Python3 not installed, please install python3"
+    exit
+  }
+  echo "Starting python3 virtual environment."
   python3 -m venv ~/.virtualenvs/myvenv
   source ~/.virtualenvs/myvenv/bin/activate
 fi
 
 doxybook -i $PATH_BUILD/xml -o $PATH_BUILD/gitbook -s $PATH_BUILD/gitbook/SUMMARY.md -t gitbook
-deactivate
 
+if("$PY_VER_MAJOR" != "3"); then
+  echo "Deactivating python3 virtual environment."
+  deactivate
+fi
 
 if [ -d "$PATH_STATIC" ]; then
   ## copy static files into gitbook before
