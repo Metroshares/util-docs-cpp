@@ -11,15 +11,19 @@ PATH_STATIC="$ABS_PATH/docs"
 if [ -d "$PATH_BUILD" ]; then
   ## copy static files into gitbook before
   read -p "Preparing build, sure you want to rm -fr $PATH_BUILD? (press enter, or alt+c to cancel)" -n 1 -r
-  rm -fr $PATH_BUILD book.json styles layout images static modules classes interfaces gitbook
+  rm -fr $PATH_BUILD
 fi
 
 cp SUMMARY.md $PATH_BUILD/gitbook/SUMMARY.md
 
-try {
+{
   doxygen &&
+  python3 -m venv ~/.virtualenvs/myvenv
+  source ~/.virtualenvs/myvenv/bin/activate
+  which python
   doxybook -i $PATH_BUILD/xml -o $PATH_BUILD/gitbook -s $PATH_BUILD/gitbook/SUMMARY.md -t gitbook
-} catch {
+  deactivate
+} || {
   echo "Doxygen or Doxybook was not installed. Install both and try again. Exiting now."
   exit
 }
@@ -40,11 +44,11 @@ cp -R $PATH_CONFIG/theme/layout $PATH_TD_BUILD/layout
 cp -R $PATH_CONFIG/theme/images $PATH_TD_BUILD/images
 #copy images into new build directory
 
-try {
+{
   #run gitbook install/build
   $PATH_CONFIG/node_modules/.bin/gitbook install $PATH_TD_BUILD
   $PATH_CONFIG/node_modules/.bin/gitbook build $PATH_TD_BUILD
-} catch {
+} || {
   echo "Gitbook does not appear to be installed, try 'npm run docs:init'"
   exit
 }
