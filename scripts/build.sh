@@ -49,7 +49,7 @@ fi
 
 doxybook -i $PATH_BUILD/xml -o $PATH_BUILD/gitbook -s $PATH_BUILD/gitbook/SUMMARY.md -t gitbook
 
-if("$PY_VER_MAJOR" != "3"); then
+if[ "$PY_VER_MAJOR" != "3" ]; then
   echo "Deactivating python3 virtual environment."
   deactivate
 fi
