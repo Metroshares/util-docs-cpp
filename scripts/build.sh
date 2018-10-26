@@ -45,11 +45,12 @@ if [ "$PY_VER_MAJOR" != "3" ]; then
   echo "Starting python3 virtual environment."
   python3 -m venv ~/.virtualenvs/myvenv
   source ~/.virtualenvs/myvenv/bin/activate
+  PY_VENV=true
 fi
 
 doxybook -i $PATH_BUILD/xml -o $PATH_BUILD/gitbook -s $PATH_BUILD/gitbook/SUMMARY.md -t gitbook
 
-if[ "$PY_VER_MAJOR" != "3" ]; then
+if $PY_VENV; then
   echo "Deactivating python3 virtual environment."
   deactivate
 fi
