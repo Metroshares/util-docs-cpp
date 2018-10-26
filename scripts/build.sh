@@ -89,11 +89,11 @@ cp -R $PATH_CONFIG/theme/images $PATH_BUILD/gitbook/images
   exit
 }
 
-if [ -d "$PATH_OUTPUT" ]; then
+if [ ! -d "$PATH_OUTPUT" ]; then
   mkdir $PATH_OUTPUT
 fi
 
-if [ -d "$PATH_OUTPUT/$VERSION" ]; then
+if [ ! -d "$PATH_OUTPUT/$VERSION" ]; then
   mkdir $PATH_OUTPUT/$VERSION
 fi
 
