@@ -5,7 +5,6 @@ ABS_PATH=$(pwd)
 PATH_CONFIG=${1-"$ABS_PATH/.docs"} #path to docs directory
 PATH_BUILD=${2-"$ABS_PATH/tmp"} #path to build directory
 
-PATH_TD_BUILD=$PATH_BUILD
 PATH_STATIC="$ABS_PATH/docs"
 
 if [ -d "$PATH_BUILD" ]; then
@@ -39,19 +38,19 @@ if [ -d "$PATH_STATIC" ]; then
 fi
 
 #copy book.json into new build directory
-cp $PATH_CONFIG/book.json $PATH_TD_BUILD/book.json
+cp $PATH_CONFIG/book.json $PATH_BUILD/gitbook/book.json
 #copy style overrides into new build directory
-cp -R $PATH_CONFIG/theme/styles $PATH_TD_BUILD/styles
+cp -R $PATH_CONFIG/theme/styles $PATH_BUILD/gitbook/styles
 #copy layout overrides into new build directory
-cp -R $PATH_CONFIG/theme/layout $PATH_TD_BUILD/layout
+cp -R $PATH_CONFIG/theme/layout $PATH_BUILD/gitbook/layout
 #copy images into new build directory
-cp -R $PATH_CONFIG/theme/images $PATH_TD_BUILD/images
+cp -R $PATH_CONFIG/theme/images $PATH_BUILD/gitbook/images
 #copy images into new build directory
 
 {
   #run gitbook install/build
-  $PATH_CONFIG/node_modules/.bin/gitbook install $PATH_TD_BUILD
-  $PATH_CONFIG/node_modules/.bin/gitbook build $PATH_TD_BUILD
+  $PATH_CONFIG/node_modules/.bin/gitbook install $PATH_BUILD/gitbook
+  $PATH_CONFIG/node_modules/.bin/gitbook build $PATH_BUILD/gitbook
 } || {
   echo "Gitbook does not appear to be installed, try 'npm run docs:init'"
   exit
