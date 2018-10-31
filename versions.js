@@ -12,6 +12,7 @@ const obj = { versions:[] }
 fs.readdir(program.path, (err, files) => {
   files.forEach(file => {
     obj.versions.push({
+      console.log(file)
       value: file
     })
   });
