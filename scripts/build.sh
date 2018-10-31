@@ -11,11 +11,17 @@ VERSION=${_VERSION:1}
 
 if [ !VERSION ]; then
   echo "version must be set."
+  exit
 fi;
 
 echo "Checking out tag $VERSION"
-git fetch --all --tags --prune
-git checkout tags/$_VERSION
+{
+  git fetch --all --tags --prune
+  git checkout tags/v$_VERSION
+} || {
+  echo "Something went wrong while checking out the version."
+  exit
+}
 
 PATH_STATIC="$ABS_PATH/docs"
 
