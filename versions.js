@@ -17,6 +17,6 @@ fs.readdir(program.path, (err, files) => {
   });
 })
 
-fs.writeFile('versions.json', json, 'utf8', (err, data) => {
+fs.writeFile('versions.json', JSON.stringify(json), 'utf8', (err, data) => {
   console.log(data)
 });
