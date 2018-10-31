@@ -35,7 +35,7 @@ if [ ! -d "$PATH_OUTPUT/history/$VERSION" ]; then
   mkdir $PATH_OUTPUT/history/$VERSION
 fi
 
-node .docs/versions.js $PATH_OUTPUT/history
+node .docs/versions.js -p $PATH_OUTPUT/history
 
 # echo "Checking out tag $VERSION"
 # {
