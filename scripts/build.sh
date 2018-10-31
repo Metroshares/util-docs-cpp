@@ -2,19 +2,19 @@
 
 ABS_PATH=$(pwd)
 # Positionals
-_VERSION_MANUAL=${1}
+# _VERSION_MANUAL=${1}
 
 PATH_CONFIG=${2-"$ABS_PATH/.docs"}
 PATH_BUILD=${3-"$ABS_PATH/tmp"}
 
 PATH_OUTPUT="docs"
 
-if [ -z "$_VERSION_MANUAL" ]; then
-  _VERSION=$(git describe --tags)
-  VERSION=${_VERSION:1}
-else
-  VERSION=$_VERSION_MANUAL
-fi;
+# if [ -z "$_VERSION_MANUAL" ]; then
+#   _VERSION=$(git describe --tags)
+#   VERSION=${_VERSION:1}
+# else
+#   VERSION=$_VERSION_MANUAL
+# fi;
 
 echo "VERSION: $VERSION"
 
@@ -23,14 +23,14 @@ if [ -z "$VERSION" ]; then
   exit
 fi;
 
-echo "Checking out tag $VERSION"
-{
-  git fetch --all --tags --prune
-  git checkout tags/v$VERSION
-} || {
-  echo "Something went wrong while checking out the version."
-  exit
-}
+# echo "Checking out tag $VERSION"
+# {
+#   git fetch --all --tags --prune
+#   git checkout tags/v$VERSION
+# } || {
+#   echo "Something went wrong while checking out the version."
+#   exit
+# }
 
 PATH_STATIC="$ABS_PATH/docs"
 
@@ -51,7 +51,6 @@ cp README.md $PATH_BUILD/gitbook/README.md
 } || {
   echo "Doxygen is not installed. Install and try again. Exiting now."
   exit
-
 }
 
 PY_VER=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
