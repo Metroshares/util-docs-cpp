@@ -7,7 +7,7 @@ program
   .option('-p, --path', 'Absolute path to directory containing "versions" directories [docs/history]', 'docs/history')
   .parse(process.argv);
 
-const obj = { versions:[] }
+let obj = { versions:[] }
 
 fs.readdir(program.path, (err, files) => {
   files.forEach(file => {
