@@ -110,11 +110,17 @@ if [ ! -d "$PATH_OUTPUT" ]; then
   mkdir $PATH_OUTPUT
 fi
 
-if [ ! -d "$PATH_OUTPUT/$VERSION" ]; then
-  mkdir $PATH_OUTPUT/$VERSION
+if [ ! -d "$PATH_OUTPUT/history" ]; then
+  mkdir $PATH_OUTPUT/history
 fi
 
-cp -R $PATH_BUILD/gitbook/. $PATH_OUTPUT/$VERSION
+if [ ! -d "$PATH_OUTPUT/history/$VERSION" ]; then
+  mkdir $PATH_OUTPUT/history/$VERSION
+fi
+
+
+
+cp -R $PATH_BUILD/gitbook/. $PATH_OUTPUT/history/$VERSION
 
 # cp $PATH_CONFIG/theme/index.html ./index.html
 

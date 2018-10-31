@@ -10,6 +10,7 @@
     "url": "https://github.com/EOSIO/eosio-book-ts"
   },
   "dependencies": {
+    "commander": "^2.19.0",
     "gitbook-cli": "2.3.2"
   },
   "devDependencies": {}
