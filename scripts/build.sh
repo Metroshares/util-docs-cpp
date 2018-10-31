@@ -23,6 +23,20 @@ if [ -z "$VERSION" ]; then
   exit
 fi;
 
+if [ ! -d "$PATH_OUTPUT" ]; then
+  mkdir $PATH_OUTPUT
+fi
+
+if [ ! -d "$PATH_OUTPUT/history" ]; then
+  mkdir $PATH_OUTPUT/history
+fi
+
+if [ ! -d "$PATH_OUTPUT/history/$VERSION" ]; then
+  mkdir $PATH_OUTPUT/history/$VERSION
+fi
+
+node .docs/version.js $PATH_OUTPUT/history
+
 # echo "Checking out tag $VERSION"
 # {
 #   git fetch --all --tags --prune
@@ -106,22 +120,6 @@ cp -R $PATH_CONFIG/theme/images $PATH_BUILD/gitbook/images
   exit
 }
 
-if [ ! -d "$PATH_OUTPUT" ]; then
-  mkdir $PATH_OUTPUT
-fi
-
-if [ ! -d "$PATH_OUTPUT/history" ]; then
-  mkdir $PATH_OUTPUT/history
-fi
-
-if [ ! -d "$PATH_OUTPUT/history/$VERSION" ]; then
-  mkdir $PATH_OUTPUT/history/$VERSION
-fi
-
-
-
 cp -R $PATH_BUILD/gitbook/. $PATH_OUTPUT/history/$VERSION
-
 # cp $PATH_CONFIG/theme/index.html ./index.html
-
 # git clean -fx $PATH_BUILD
