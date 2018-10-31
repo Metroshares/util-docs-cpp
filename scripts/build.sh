@@ -10,18 +10,18 @@ PATH_BUILD=${3-"$ABS_PATH/tmp"}
 PATH_OUTPUT="docs"
 
 # if [ -z "$_VERSION_MANUAL" ]; then
-#   _VERSION=$(git describe --tags)
-#   VERSION=${_VERSION:1}
+  _VERSION=$(git describe --tags)
+  VERSION=${_VERSION:1}
 # else
-#   VERSION=$_VERSION_MANUAL
+  VERSION=$_VERSION_MANUAL
 # fi;
 
-echo "VERSION: $VERSION"
+# echo "VERSION: $VERSION"
 
-if [ -z "$VERSION" ]; then
-  echo "Version must be set."
-  exit
-fi;
+# if [ -z "$VERSION" ]; then
+#   echo "Version must be set."
+#   exit
+# fi;
 
 # echo "Checking out tag $VERSION"
 # {
