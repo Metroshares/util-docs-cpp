@@ -6,12 +6,16 @@ PATH_CONFIG=${2-"$ABS_PATH/.docs"}
 PATH_BUILD=${3-"$ABS_PATH/tmp"}
 
 PATH_OUTPUT="docs"
-VERSION=$(git describe --tags)
-VERSION=${VERSION:1}
+_VERSION=$(git describe --tags)
+VERSION=${_VERSION:1}
 
-if !VERSION; then
+if [ !VERSION ]; then
   echo "version must be set."
 fi;
+
+echo "Checking out tag $VERSION"
+git fetch --all --tags --prune
+git checkout tags/$_VERSION
 
 PATH_STATIC="$ABS_PATH/docs"
 

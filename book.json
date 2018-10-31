@@ -3,7 +3,8 @@
     "page-toc",
     "custom-header-next@git+https://github.com/dskvr/gitbook-plugin-custom-header-next.git",
     "favicon",
-    "toggle-chapters"
+    "toggle-chapters",
+    "versions"
   ],
   "pluginsConfig": {
     "page-toc": {
@@ -21,6 +22,9 @@
     "favicon":{
         "shortcut": "images/favicon.ico",
         "bookmark": "images/favicon.ico"
+    },
+    "versions": {
+        "type": "tags"
     }
   }
 }
