@@ -9,7 +9,7 @@ PATH_BUILD=${3-"$ABS_PATH/tmp"}
 
 PATH_OUTPUT="docs"
 
-if [ !_VERSION_MANUAL ]; then
+if [ -z "$_VERSION_MANUAL" ]; then
   _VERSION=$(git describe --tags)
   VERSION=${_VERSION:1}
 else
@@ -18,7 +18,7 @@ fi;
 
 echo "VERSION: $VERSION"
 
-if [ !VERSION ]; then
+if [ -z "$VERSION" ]; then
   echo "Version must be set."
   exit
 fi;
