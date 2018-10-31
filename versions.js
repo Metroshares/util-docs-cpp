@@ -7,16 +7,16 @@ program
   .option('-p, --path', 'Absolute path to directory containing "versions" directories [docs/history]', 'docs/history')
   .parse(process.argv);
 
-const json = []
+const obj = { versions:[] }
 
 fs.readdir(program.path, (err, files) => {
   files.forEach(file => {
-    json.push({
+    obj.versions.push({
       value: file
     })
   });
 })
 
-fs.writeFile('versions.json', JSON.stringify(json), 'utf8', (err, data) => {
+fs.writeFile('versions.json', JSON.stringify(obj), 'utf8', (err, data) => {
   console.log(data)
 });
