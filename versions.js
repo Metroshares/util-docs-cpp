@@ -10,17 +10,15 @@ program
 let obj = {}
     obj.versions = []
 
-await fs.readdir(program.path, (err, files) => {
+fs.readdir(program.path, (err, files) => {
   files.forEach(file => {
     console.log(file)
     obj.versions.push({
       value: file
     })
   });
+
+  fs.writeFile('versions.json', JSON.stringify(obj), 'utf8', (err, data) => {
+    console.log(data)
+  });
 })
-
-console.log(obj)
-
-fs.writeFile('versions.json', JSON.stringify(obj), 'utf8', (err, data) => {
-  console.log(data)
-});
