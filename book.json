@@ -24,7 +24,7 @@
         "bookmark": "images/favicon.ico"
     },
     "versions": {
-      "gitbookConfigURL": "/book.json",
+      "gitbookConfigURL": "localhost:4000/book.json",
       "options": [
         {
           "value": "1.2.1/",

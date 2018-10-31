@@ -16,12 +16,12 @@ PATH_OUTPUT="docs"
   VERSION=$_VERSION_MANUAL
 # fi;
 
-# echo "VERSION: $VERSION"
+echo "VERSION: $VERSION"
 
-# if [ -z "$VERSION" ]; then
-#   echo "Version must be set."
-#   exit
-# fi;
+if [ -z "$VERSION" ]; then
+  echo "Version must be set."
+  exit
+fi;
 
 # echo "Checking out tag $VERSION"
 # {
