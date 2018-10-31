@@ -13,7 +13,7 @@ if [ -z "$_VERSION_MANUAL" ]; then
   _VERSION=$(git describe --tags)
   VERSION=${_VERSION:1}
 else
-  VERSION=_VERSION_MANUAL
+  VERSION=$_VERSION_MANUAL
 fi;
 
 echo "VERSION: $VERSION"
