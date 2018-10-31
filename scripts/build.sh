@@ -2,22 +2,31 @@
 
 ABS_PATH=$(pwd)
 # Positionals
+_VERSION_MANUAL=${1}
+
 PATH_CONFIG=${2-"$ABS_PATH/.docs"}
 PATH_BUILD=${3-"$ABS_PATH/tmp"}
 
 PATH_OUTPUT="docs"
-_VERSION=$(git describe --tags)
-VERSION=${_VERSION:1}
+
+if [ !_VERSION_MANUAL ]; then
+  _VERSION=$(git describe --tags)
+  VERSION=${_VERSION:1}
+else
+  VERSION=_VERSION_MANUAL
+fi;
+
+echo "VERSION: $VERSION"
 
 if [ !VERSION ]; then
-  echo "version must be set."
+  echo "Version must be set."
   exit
 fi;
 
 echo "Checking out tag $VERSION"
 {
   git fetch --all --tags --prune
-  git checkout tags/v$_VERSION
+  git checkout tags/v$VERSION
 } || {
   echo "Something went wrong while checking out the version."
   exit
