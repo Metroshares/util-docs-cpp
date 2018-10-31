@@ -1,6 +1,7 @@
 {
   "plugins": [
     "page-toc",
+    "custom-header-next@git+https://github.com/dskvr/gitbook-plugin-custom-header-next.git",
     "versions-minimal@git+https://github.com/dskvr/gitbook-plugin-versions-minimal.git",
     "favicon",
     "toggle-chapters"
