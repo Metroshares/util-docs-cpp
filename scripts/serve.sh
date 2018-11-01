@@ -4,7 +4,7 @@ PATH_CONFIG=$ABS_PATH/.docs
 
 PATH_OUTPUT="docs"
 
-VERSION=$(git describe --tags)
+VERSION=$(git describe --abbrev=0 --tags)
 VERSION=${VERSION:1}
 
 PATH_SERVE=$PATH_OUTPUT/history/$VERSION #path to build directory
