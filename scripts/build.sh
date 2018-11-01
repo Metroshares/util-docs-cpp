@@ -10,7 +10,7 @@ PATH_BUILD=${3-"$ABS_PATH/tmp"}
 PATH_OUTPUT="docs"
 
 # if [ -z "$_VERSION_MANUAL" ]; then
-  _VERSION=$(git describe --tags)
+  _VERSION=$(git describe --abbrev=0 --tags)
   VERSION=${_VERSION:1}
 # else
   # VERSION=$_VERSION_MANUAL
