@@ -101,6 +101,8 @@ if [ -d "$PATH_STATIC" ]; then
   cp -a $PATH_STATIC/. $PATH_BUILD/static
 fi
 
+node .docs/config.js
+
 #copy book.json into new build directory
 cp $PATH_CONFIG/book.json $PATH_BUILD/gitbook/book.json
 #copy style overrides into new build directory

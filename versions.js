@@ -12,13 +12,10 @@ let obj = {}
 
 fs.readdir(program.path, (err, files) => {
   files.forEach(file => {
-    console.log(file)
     obj.versions.push({
       value: file
     })
   });
 
-  fs.writeFile('versions.json', JSON.stringify(obj), 'utf8', (err, data) => {
-    console.log(data)
-  });
+  fs.writeFile('versions.json', JSON.stringify(obj), 'utf8', () => {});
 })

@@ -1,6 +1,5 @@
 ABS_PATH=$(pwd)
 PATH_CONFIG=$ABS_PATH/.docs
-# Positional
 
 PATH_OUTPUT="docs"
 
