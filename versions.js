@@ -13,7 +13,10 @@ let obj = {}
 fs.readdir(program.path, (err, files) => {
   files.forEach(file => {
     obj.versions.push({
-      value: file
+      value: file,
+      latest: false,
+      beta: false,
+      public: true
     })
   });
 
