@@ -78,14 +78,10 @@ npm run docs:serve
 
 ```
 /project
-  package.json
   /static
   /tmp
+  Doxyfile
 ```
-
-## Typescript Versioning
-* `TypeScript >= 2.9.1 use TypeDoc ^0.12.0` _default_ |
-* `TypeScript <= 2.9.0 use TypeDoc < 0.12.0 ` |
 
 ## Doc Scripts
 
