@@ -1,7 +1,12 @@
-_An experimental documentation convention for EOSIO based repositories. Not suitable for production integration, hard-coded configurations present._
+_An experimental documentation convention for EOSIO based repositories. Not suitable for production integration, hard-coded configurations are present._
 
-# Docs: Typescript
-For implementing EOSIO Docs with Typescript.
+# Docs: CPP
+For implementing EOSIO Docs with CPP
+
+# Dependencies
+- NPM/Nodejs
+- Doxygen
+- [Doxybook](https://github.com/dskvr/doxybook)
 
 # Quickstart
 Open terminal and CD to the root directory of your project.
@@ -11,7 +16,7 @@ cd ./path/to/project
 
 ## Add submodule
 ```bash
-git submodule add https://github.com/EOSIO/util-docs-ts.git .docs
+git submodule add https://github.com/EOSIO/util-docs-cpp.git .docs
 ```
 
 ## Add scripts to project's `package.json`
@@ -19,77 +24,63 @@ git submodule add https://github.com/EOSIO/util-docs-ts.git .docs
 ...
 "scripts" : {
   ...
-  "docs-build": "sh .docs/scripts/build.sh",
-  "docs-serve": "sh .docs/scripts/serve.sh",
-  "docs-init": "sh .docs/scripts/init.sh"
+  "docs:init": "sh .docs/scripts/init.sh",
+  "docs:build": "sh .docs/scripts/build.sh",
+  "docs:serve": "sh .docs/scripts/serve.sh",
+  "docs:publish": "sh .docs/scripts/publish.sh",
 },
 ...
 ```
 
-### Add typedoc.json
+### Add eosio.doc.json
 
 In the root of your project, modify **name, target, module** as needed.
 ```
 {
-  "name": "myproject",
-  "target": "es5",
-  "module": ["es2017","dom"],
-  "ignoreCompilerErrors": true,
-  "includeDeclarations": false,
-  "excludeProtected": true,
-  "excludePrivate": true,
-  "mode": "modules",
-  "out": "docs/build",
-  "theme": "markdown",
-  "mdEngine": "gitbook",
-  "stripExternal": false,
-  "exclude": ["**/index*","**/*.test.ts"],
-  "readme": "README.md",
-  "hideGenerator": "true",
-  "verbose": true,
-  "mdSourceRepo": "https://www.github.com/EOSIO/eosjs2"
+  "project": "nameofrepository"
 }
 ```
 
-## Install
+### Add Doxyfile to root directory of project
 
-If on TypeScript >= 2.9.1
+Set the following
+- `GENERATE_XML=TRUE`
+- `GENERATE_HTML=FALSE`
+
+Additional configurations may need to be made to produce the output you desire, such as setting Doxygen variables for source directories, inclusion/exclusion rules and documentation parameters.
+
+## Install
 
 ```bash
 npm run docs-init
 ```
-_this installs typedoc packages and npm installs the submodule._
+_injects gitbook dependencies into project_
 
-If on TypeScript <= 2.9.0
-
-_Presently only support TypeScript 2.9.1+_
 
 ## build
-Build. The previous build will be deleted and replaced
+Build. Will use `git describe` to derive the most recent tag associated with the branch, and place the generated documentation files into `./docs/history/3.2.1`
+
 ```bash
-npm run docs-build
+npm run docs:build
 ```
 
 ## serve locally
-Requires python
 ```bash
-npm run docs-serve
+npm run docs:serve
 ```
 
 # Conventions
 
 ## docs Filesystem Convention (strict)
-- A `./docs` should contain markdown files. Using numbers and capitalization is suggested to control presentation. For example `1.-Hello-World.md`;
+- A `./static` directory can contain markdown files for tutorials, etc. Using numbers and capitalization can be used to control presentation. For example `1.-Hello-World.md`. There is presently no support for subdirectories.
 - `./docs/build` directory will be created by build scripts.
 - Compliance is easiest when location of source code is `./src`
 
 ```
 /project
   package.json
-  /docs
-    /static
-    /build
-  /src
+  /static
+  /tmp
 ```
 
 ## Typescript Versioning
