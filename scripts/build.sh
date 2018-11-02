@@ -123,5 +123,7 @@ cp -R $PATH_CONFIG/theme/images $PATH_BUILD/gitbook/images
 }
 
 cp -R $PATH_BUILD/gitbook/. $PATH_OUTPUT/history/$VERSION
+
+touch ./.nojekyll
 # cp $PATH_CONFIG/theme/index.html ./index.html
 # git clean -fx $PATH_BUILD
