@@ -1,5 +1,5 @@
 ABS_PATH=$(pwd)
-PATH_BUILD=${1-"$ABS_PATH/docs-build"}
+PATH_BUILD=${1-"$ABS_PATH/tmp"}
 
 VERSION=$(git describe --abbrev=0 --tags)
 VERSION=${VERSION:1}
