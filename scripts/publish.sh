@@ -1,5 +1,9 @@
 ABS_PATH=$(pwd)
 PATH_BUILD=${1-"$ABS_PATH/docs-build"}
 
-cp -a $PATH_BUILD/_book/. .
+VERSION=$(git describe --abbrev=0 --tags)
+VERSION=${VERSION:1}
+
+cp -a $PATH_BUILD/gitbook/_book/. .
+
 git clean -fx $PATH_BUILD
