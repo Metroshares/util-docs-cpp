@@ -17,7 +17,7 @@
       "logo_alt":"EOSIO",
       "base_path":"/${project}",
       "text": "${project}",
-      "navigations": []
+      "navigations": [{"title":"Developers Portal", "link":"http://developers.eos.io", "id":"back-to-portal"}]
     },
     "favicon":{
         "shortcut": "images/favicon.ico",
