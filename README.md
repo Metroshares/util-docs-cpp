@@ -52,7 +52,7 @@ Additional configurations may need to be made to produce the output you desire, 
 ## Install
 
 ```bash
-npm run docs-init
+npm run docs:init
 ```
 _injects gitbook dependencies into project_
 
