@@ -115,7 +115,7 @@ if [ -d "$PATH_STATIC" ]; then
     then
       echo "Index exists for directory."
     else
-      cat "# $(echo ${d##/*/})" > $d/index.md
+      echo "# $(echo ${d##/*/})" > $d/index.md
     fi
 
     for f in $d/*.md; do
