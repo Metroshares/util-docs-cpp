@@ -126,13 +126,14 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
 
     echo "# $dir" > $PATH_BUILD/$dir/index.md
 
+    let line+=1
     sed -i.bak ''"$line"'i\
-    \ \ \ \ * ['"$( echo $dir )"']('"$( echo /$dir/index.md)"')\
+    * ['"$( echo $dir )"']('"$( echo /$dir/index.md)"')\
     ' $summary
 
     for f in $PATH_BUILD/$dir/*.md; do
-      echo "File Found: $f [on line #$line]"
-      let line+=1
+      echo "File Found: $f"
+
 
       filename=$(echo ${f##/*/})
       prettyname=${filename//-/$'\n'}
@@ -145,8 +146,9 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
 
       echo "* [$prettyname]($f)" >> $PATH_BUILD/$dir/index.md
 
+      let line+=1
       sed -i.bak ''"$line"'i\
-      \t* ['"$( echo $prettyname )"']('"$( echo /$dir/$filename)"')\
+      \ \ \ \ * ['"$( echo $prettyname )"']('"$( echo /$dir/$filename)"')\
       ' $summary
     done
   done
