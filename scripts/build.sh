@@ -134,22 +134,19 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
     for f in $PATH_BUILD/$dir/*.md; do
       echo "File Found: $f"
 
-
       filename=$(echo ${f##/*/})
       prettyname=${filename//-/$'\n'}
       prettyname=${prettyname//.md/$'\n'}
 
-      if [ "$filename" = "index" ]
+      if [ "$filename" != "index.md" ]
       then
-        continue
+        echo "* [$prettyname]($f)" >> $PATH_BUILD/$dir/index.md
+
+        let line+=1
+        sed -i.bak ''"$line"'i\
+        \ \ \ \ * ['"$( echo $prettyname )"']('"$( echo /$dir/$filename)"')\
+        ' $summary
       fi
-
-      echo "* [$prettyname]($f)" >> $PATH_BUILD/$dir/index.md
-
-      let line+=1
-      sed -i.bak ''"$line"'i\
-      \ \ \ \ * ['"$( echo $prettyname )"']('"$( echo /$dir/$filename)"')\
-      ' $summary
     done
   done
 
