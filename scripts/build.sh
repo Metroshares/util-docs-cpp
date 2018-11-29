@@ -109,7 +109,7 @@ if [ -d "$PATH_STATIC" ]; then
 
   for d in $PATH_STATIC/
   do
-    '1i\
+    sed -i.bak '1i\
     * [$d]()\
     '
     echo "Directory Found: $d"
