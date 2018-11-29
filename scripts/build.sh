@@ -101,7 +101,7 @@ cp -R $PATH_STATIC/. $PATH_BUILD/
 if [ -d "$PATH_BUILD/gitbook/" ]; then
   echo "Static Directory found."
 #Add files to summary
-  line=1
+  line=3
   summary="$PATH_BUILD/gitbook/SUMMARY.md"
 
   let line+=1
