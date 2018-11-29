@@ -108,9 +108,17 @@ if [ -d "$PATH_STATIC" ]; then
   ' $summary
 
   let line+=2
-  for d in $PATH_STATIC/*
+  for d in $PATH_STATIC/*.md
   do
     echo "Directory Found: $d"
+    if [ -d "$f" ]
+    then
+      cat "* [$(echo ${d##/*/})]($d/index.md)" >> $d/index.md
+    else
+      cat "# $(echo ${d##/*/})\r\n* [$(echo ${d##/*/})]($d/index.md)" >> $d/index.md
+    fi
+
+
     for f in $d/*; do
       let line+=1
       echo "File Found: $f"
@@ -119,7 +127,7 @@ if [ -d "$PATH_STATIC" ]; then
       prettyname=${filename//-/$'\n'}
       prettyname=${prettyname//.md/$'\n'}
       sed -i.bak ''"$line"'i\
-      * ['"$( echo $prettyname )"']('"$( echo $d/${f##/*/})"')\
+        * ['"$( echo $prettyname )"']('"$( echo $d/${f##/*/})"')\
       ' $summary
     done
   done
