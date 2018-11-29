@@ -105,6 +105,10 @@ if [ -d "$PATH_STATIC" ]; then
 
   for d in $PATH_STATIC/*
   do
+    if ["${d##/*/}" == "history"]
+    then
+      continue
+    fi
     echo "Directory Found: $d"
     if [ -d "$f" ]
     then
