@@ -110,7 +110,6 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
 
   for d in $PATH_STATIC/*
   do
-    _dir=$(dirname "${d}")
     dir=$(echo ${d##/*/})
     echo "Checking dir $dir"
 
@@ -122,7 +121,7 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
     echo "Directory Found: $dir -> $d"
 
     mkdir $PATH_BUILD/$dir/
-    cp -a $PATH_STATIC/$dir/. $PATH_BUILD/$dir/
+    cp -a $PATH_STATIC/$dir/. $PATH_BUILD/gitbook/$dir/
 
     echo "# $dir" > $PATH_BUILD/$dir/index.md
 
