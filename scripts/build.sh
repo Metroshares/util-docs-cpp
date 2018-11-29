@@ -57,10 +57,6 @@ fi
 mkdir $PATH_BUILD
 mkdir $PATH_BUILD/gitbook
 
-cp SUMMARY.md $PATH_BUILD/gitbook/SUMMARY.md
-cp README.md $PATH_BUILD/gitbook/README.md
-cp LICENSE.md $PATH_BUILD/gitbook/LICENSE.md
-
 {
   doxygen
 } || {
@@ -89,7 +85,7 @@ if [ "$PY_VER_MAJOR" != "3" ]; then
   PY_VENV=true
 fi
 
-doxybook -i $PATH_BUILD/xml -o $PATH_BUILD/gitbook -s $PATH_BUILD/gitbook/SUMMARY.md -t gitbook
+doxybook -i $PATH_BUILD/xml -o $PATH_BUILD/gitbook -s SUMMARY.md -t gitbook
 
 if $PY_VENV; then
   echo "Deactivating python3 virtual environment."
@@ -113,9 +109,11 @@ if [ -d "$PATH_STATIC" ]; then
     echo "Directory Found: $d"
     if [ -d "$f" ]
     then
+      echo "Index exists for directory."
     else
-      cat "# $(echo ${d##/*/})" > $d/index.md
+      cat "# $(echo ${d##/*/})" > $PATH_BUILD/${d##/*/}/index.md
     fi
+    bd=$PATH_BUILD/${d##/*/}
     for f in $d/*; do
       let line+=1
       echo "File Found: $f"
@@ -135,6 +133,10 @@ if [ -d "$PATH_STATIC" ]; then
 
   cp -R $PATH_STATIC/. $PATH_BUILD/static
 fi
+
+cp SUMMARY.md $PATH_BUILD/gitbook/SUMMARY.md
+cp README.md $PATH_BUILD/gitbook/README.md
+cp LICENSE.md $PATH_BUILD/gitbook/LICENSE.md
 
 node .docs/config.js
 
