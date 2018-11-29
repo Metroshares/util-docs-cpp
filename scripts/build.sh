@@ -59,7 +59,7 @@ mkdir $PATH_BUILD/gitbook
 
 cp SUMMARY.md $PATH_BUILD/gitbook/SUMMARY.md
 cp README.md $PATH_BUILD/gitbook/README.md
-cp LICENSE.md $PATH_BUILD/gitbook/LICENSE.md
+cp LICENSE $PATH_BUILD/gitbook/LICENSE.md
 
 {
   doxygen
@@ -101,10 +101,11 @@ cp -R $PATH_STATIC/. $PATH_BUILD/
 if [ -d "$PATH_BUILD/gitbook/" ]; then
   echo "Static Directory found."
 #Add files to summary
-  line=2
+  line=1
   summary="$PATH_BUILD/gitbook/SUMMARY.md"
 
-  sed -i.bak '2i\
+  let line+=1
+  sed -i.bak ''"$line"'i\
   * [License]( LICENSE.md )\
   ' $summary
 
