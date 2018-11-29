@@ -169,8 +169,6 @@ cp -R $PATH_CONFIG/theme/layout $PATH_BUILD/gitbook/layout
 cp -R $PATH_CONFIG/theme/images $PATH_BUILD/gitbook/images
 #copy images into new build directory
 
-
-
 {
   #run gitbook install/build
   $PATH_CONFIG/node_modules/.bin/gitbook install $PATH_BUILD/gitbook
