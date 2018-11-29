@@ -111,10 +111,9 @@ if [ -d "$PATH_STATIC" ]; then
     then
       echo "Index exists for directory."
     else
-      cat "# $(echo ${d##/*/})" > $PATH_BUILD/${d##/*/}/index.md
+      cat "# $(echo ${d##/*/})" > $PATH_STATIC/${d##/*/}/index.md
     fi
-    bd=$PATH_BUILD/${d##/*/}
-    for f in $d/*; do
+    for f in $bd/*; do
       let line+=1
       echo "File Found: $f"
       let line+=1
