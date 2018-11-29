@@ -105,10 +105,11 @@ if [ -d "$PATH_STATIC" ]; then
 
   for d in $PATH_STATIC/*
   do
-    if ["${d##/*/}" == "history"]
+    if [ "${d##/*/}" == "history" ]
     then
       continue
     fi
+
     echo "Directory Found: $d"
     if [ -d "$f" ]
     then
@@ -116,17 +117,22 @@ if [ -d "$PATH_STATIC" ]; then
     else
       cat "# $(echo ${d##/*/})" > $PATH_STATIC/${d##/*/}/index.md
     fi
+
     for f in $d/*.md; do
-      if [ "${f##/*/}" == "index.md" ]
-      then
-        continue
-      fi
+
       echo "File Found: $f"
       let line+=1
       filename=$(echo ${f##/*/})
       prettyname=${filename//-/$'\n'}
       prettyname=${prettyname//.md/$'\n'}
+
+      if [ "$prettyname" == "index" ]
+      then
+        continue
+      fi
+
       echo "* [$prettyname]($f)" >> $d/index.md
+
       sed -i.bak ''"$line"'i\
         * ['"$( echo $prettyname )"']('"$( echo $d/${f##/*/})"')\
       ' $summary
