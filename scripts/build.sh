@@ -104,7 +104,7 @@ if [ -d "$PATH_STATIC" ]; then
   ' $summary
 
   let line+=2
-  for d in $PATH_STATIC/*.md
+  for d in $PATH_STATIC/*
   do
     echo "Directory Found: $d"
     if [ -d "$f" ]
@@ -113,7 +113,7 @@ if [ -d "$PATH_STATIC" ]; then
     else
       cat "# $(echo ${d##/*/})" > $PATH_STATIC/${d##/*/}/index.md
     fi
-    for f in $d/*; do
+    for f in $d/*.md; do
       let line+=1
       echo "File Found: $f"
       let line+=1
