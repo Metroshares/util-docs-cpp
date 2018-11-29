@@ -97,28 +97,10 @@ if $PY_VENV; then
 fi
 
 if [ -d "$PATH_STATIC" ]; then
-  ## copy static files into gitbook before
-  echo "copying static files"
-  cp -R $PATH_STATIC/. $PATH_BUILD/static
-fi
-
-node .docs/config.js
-
-#copy book.json into new build directory
-cp $PATH_CONFIG/book.json $PATH_BUILD/gitbook/book.json
-#copy style overrides into new build directory
-cp -R $PATH_CONFIG/theme/styles $PATH_BUILD/gitbook/styles
-#copy layout overrides into new build directory
-cp -R $PATH_CONFIG/theme/layout $PATH_BUILD/gitbook/layout
-#copy images into new build directory
-cp -R $PATH_CONFIG/theme/images $PATH_BUILD/gitbook/images
-#copy images into new build directory
-
-if [ -d "$PATH_STATIC" ]; then
   echo "Static Directory found."
 #Add files to summary
   line=1
-  summary="$PATH_BUILD/SUMMARY.md"
+  summary="$ABS_PATH/SUMMARY.md"
 
   sed -i.bak '1i\
   * [Readme]( README.md )\
@@ -145,7 +127,23 @@ if [ -d "$PATH_STATIC" ]; then
 
   sed -i.bak ''"$line"'i\
   ' $summary
+
+  cp -R $PATH_STATIC/. $PATH_BUILD/static
 fi
+
+node .docs/config.js
+
+#copy book.json into new build directory
+cp $PATH_CONFIG/book.json $PATH_BUILD/gitbook/book.json
+#copy style overrides into new build directory
+cp -R $PATH_CONFIG/theme/styles $PATH_BUILD/gitbook/styles
+#copy layout overrides into new build directory
+cp -R $PATH_CONFIG/theme/layout $PATH_BUILD/gitbook/layout
+#copy images into new build directory
+cp -R $PATH_CONFIG/theme/images $PATH_BUILD/gitbook/images
+#copy images into new build directory
+
+
 
 {
   #run gitbook install/build
