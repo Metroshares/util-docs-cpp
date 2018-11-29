@@ -101,16 +101,16 @@ cp -R $PATH_STATIC/. $PATH_BUILD/
 if [ -d "$PATH_BUILD/gitbook/" ]; then
   echo "Static Directory found."
 #Add files to summary
-  line=1
+  line=2
   summary="$PATH_BUILD/gitbook/SUMMARY.md"
 
-  sed -i.bak '1i\
-  * [Readme]( README.md )\
+  sed -i.bak '2i\
   * [License]( LICENSE.md )\
   ' $summary
 
   for d in $PATH_STATIC/*
   do
+    _dir=$(dirname "${d}")
     dir=$(echo ${d##/*/})
     echo "Checking dir $dir"
 
@@ -124,17 +124,12 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
     mkdir $PATH_BUILD/$dir/
     cp -a $PATH_STATIC/$dir/. $PATH_BUILD/$dir/
 
-    if [ -d "$f" ]
-    then
-      echo "Index exists for directory."
-    else
-      echo "# $dir" > $PATH_BUILD/$dir/index.md
-    fi
+    echo "# $dir" > $PATH_BUILD/$dir/index.md
 
     for f in $PATH_BUILD/$dir/*.md; do
-
-      echo "File Found: $f"
+      echo "File Found: $f [on line #$line]"
       let line+=1
+
       filename=$(echo ${f##/*/})
       prettyname=${filename//-/$'\n'}
       prettyname=${prettyname//.md/$'\n'}
@@ -147,7 +142,7 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
       echo "* [$prettyname]($f)" >> $PATH_BUILD/$dir/index.md
 
       sed -i.bak ''"$line"'i\
-        * ['"$( echo $prettyname )"']('"$( echo $dir/$filename)"')\
+      s/s/* ['"$( echo $prettyname )"']('"$( echo /$dir/$filename)"')\
       ' $summary
     done
   done
