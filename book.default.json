@@ -1,7 +1,7 @@
 {
   "plugins": [
     "-highlight",
-    "sunlight-highlighter",
+    "sunlight-highlighter@git+https://github.com/dskvr/gitbook-plugin-sunlight-highlighter.git",
     "page-toc",
     "custom-header-next@git+https://github.com/dskvr/gitbook-plugin-custom-header-next.git",
     "versions-minimal@git+https://github.com/dskvr/gitbook-plugin-versions-minimal.git",
