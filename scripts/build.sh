@@ -96,6 +96,8 @@ if $PY_VENV; then
   deactivate
 fi
 
+cp -R $PATH_STATIC/. $PATH_BUILD/
+
 if [ -d "$PATH_BUILD/gitbook/" ]; then
   echo "Static Directory found."
 #Add files to summary
@@ -111,20 +113,25 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
   do
     dir=$(echo ${d##/*/})
     echo "Checking dir $dir"
+
     if [ "$dir" == "history" ]
     then
       continue
     fi
 
     echo "Directory Found: $dir -> $d"
+    
+    mkdir $PATH_BUILD/$dir/
+    cp -a $PATH_STATIC/$dir/. $PATH_BUILD/$dir/
+
     if [ -d "$f" ]
     then
       echo "Index exists for directory."
     else
-      echo "# $dir" > $PATH_BUILD/$dir/index.md
+      echo "# $dir" > $PATH_BUILD/gitbook/$dir/index.md
     fi
 
-    for f in $d/*.md; do
+    for f in $PATH_BUILD/$dir/*.md; do
 
       echo "File Found: $f"
       let line+=1
@@ -137,7 +144,7 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
         continue
       fi
 
-      echo "* [$prettyname]($f)" >> $PATH_BUILD/$dir/index.md
+      echo "* [$prettyname]($f)" >> $PATH_BUILD/gitbook/$dir/index.md
 
       sed -i.bak ''"$line"'i\
         * ['"$( echo $prettyname )"']('"$( echo $dir/$filename)"')\
@@ -147,8 +154,6 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
 
   sed -i.bak ''"$line"'i\
   ' $summary
-
-  cp -R $PATH_STATIC/. $PATH_BUILD/static
 fi
 
 node .docs/config.js
