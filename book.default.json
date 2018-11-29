@@ -1,5 +1,7 @@
 {
   "plugins": [
+    "-highlight",
+    "sunlight-highlighter",
     "page-toc",
     "custom-header-next@git+https://github.com/dskvr/gitbook-plugin-custom-header-next.git",
     "versions-minimal@git+https://github.com/dskvr/gitbook-plugin-versions-minimal.git",
@@ -25,6 +27,10 @@
     },
     "versions-minimal": {
       "gitbookConfigURL": "/versions.json"
-    }
+    },
+    "sunlight-highlighter": {
+       "theme": "dark",
+       "lineNumber": true
+     }
   }
 }
