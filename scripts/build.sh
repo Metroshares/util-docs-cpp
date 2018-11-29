@@ -109,17 +109,19 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
 
   for d in $PATH_STATIC/*
   do
-    if [ "${d##/*/}" == "history" ]
+    dir=$(echo ${d##/*/})
+    echo "Checking dir $dir"
+    if [ "$dir" == "history" ]
     then
       continue
     fi
 
-    echo "Directory Found: $d"
+    echo "Directory Found: $dir -> $d"
     if [ -d "$f" ]
     then
       echo "Index exists for directory."
     else
-      echo "# ${d##/*/}" > $PATH_BUILD/${d##/*/}/index.md
+      echo "# $dir" > $PATH_BUILD/$dir/index.md
     fi
 
     for f in $d/*.md; do
@@ -135,10 +137,10 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
         continue
       fi
 
-      echo "* [$prettyname]($f)" >> $PATH_BUILD/${d##/*/}/index.md
+      echo "* [$prettyname]($f)" >> $PATH_BUILD/$dir/index.md
 
       sed -i.bak ''"$line"'i\
-        * ['"$( echo $prettyname )"']('"$( echo $d/${f##/*/})"')\
+        * ['"$( echo $prettyname )"']('"$( echo $d/$filename)"')\
       ' $summary
     done
   done
