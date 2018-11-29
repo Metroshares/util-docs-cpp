@@ -107,10 +107,12 @@ if [ -d "$PATH_STATIC" ]; then
   * [License]( LICENSE.md )\
   ' $summary
 
+  let line+=2
   for d in $PATH_STATIC/
   do
     echo "Directory Found: $d"
     for f in $PATH_STATIC/$d/*; do
+      let line+=1
       echo "File Found: $f"
       let line+=1
       filename=$(echo ${f##/*/})
