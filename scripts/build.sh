@@ -139,7 +139,7 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
       prettyname=${filename//-/$'\n'}
       prettyname=${prettyname//.md/$'\n'}
 
-      if [ "$filename" == "index" ]
+      if [ "$filename" = "index" ]
       then
         continue
       fi
