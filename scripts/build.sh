@@ -120,7 +120,7 @@ if [ -d "$PATH_STATIC" ]; then
       filename=$(echo ${f##/*/})
       prettyname=${filename//-/$'\n'}
       prettyname=${prettyname//.md/$'\n'}
-      cat "* [$prettyname]($f)" >> $d/index.md
+      echo "* [$prettyname]($f)" >> $d/index.md
       sed -i.bak ''"$line"'i\
         * ['"$( echo $prettyname )"']('"$( echo $d/${f##/*/})"')\
       ' $summary
