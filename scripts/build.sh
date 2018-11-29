@@ -59,6 +59,7 @@ mkdir $PATH_BUILD/gitbook
 
 cp SUMMARY.md $PATH_BUILD/gitbook/SUMMARY.md
 cp README.md $PATH_BUILD/gitbook/README.md
+cp LICENSE.md $PATH_BUILD/gitbook/LICENSE.md
 
 {
   doxygen
@@ -98,7 +99,7 @@ fi
 if [ -d "$PATH_STATIC" ]; then
   ## copy static files into gitbook before
   echo "copying static files"
-  cp -a $PATH_STATIC/. $PATH_BUILD/static
+  cp -R $PATH_STATIC/. $PATH_BUILD/static
 fi
 
 node .docs/config.js
@@ -112,6 +113,34 @@ cp -R $PATH_CONFIG/theme/layout $PATH_BUILD/gitbook/layout
 #copy images into new build directory
 cp -R $PATH_CONFIG/theme/images $PATH_BUILD/gitbook/images
 #copy images into new build directory
+
+if [ -d "$PATH_STATIC" ]; then
+#Add files to summary
+  line=1
+  summary="$PATH_BUILD/SUMMARY.md"
+
+  sed -i.bak '1i\
+  * [Readme]( README.md )\
+  * [License]( LICENSE.md )\
+  ' $summary
+
+  for d in $PATH_STATIC/
+  do
+    echo "* [$d]()"
+    for f in $PATH_STATIC/$d/*; do
+      let line+=1
+      filename=$(echo ${f##/*/})
+      prettyname=${filename//-/$'\n'}
+      prettyname=${prettyname//.md/$'\n'}
+      sed -i.bak ''"$line"'i\
+      * ['"$( echo $prettyname )"']('"$( echo $d/${f##/*/})"')\
+      ' $summary
+    done
+  done
+  
+  sed -i.bak ''"$line"'i\
+  ' $summary
+fi
 
 {
   #run gitbook install/build
