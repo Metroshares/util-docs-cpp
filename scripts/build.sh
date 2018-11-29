@@ -142,7 +142,7 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
       echo "* [$prettyname]($f)" >> $PATH_BUILD/$dir/index.md
 
       sed -i.bak ''"$line"'i\
-      s/s/* ['"$( echo $prettyname )"']('"$( echo /$dir/$filename)"')\
+      \t* ['"$( echo $prettyname )"']('"$( echo /$dir/$filename)"')\
       ' $summary
     done
   done
