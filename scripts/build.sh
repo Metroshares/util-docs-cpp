@@ -126,6 +126,10 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
 
     echo "# $dir" > $PATH_BUILD/$dir/index.md
 
+    sed -i.bak ''"$line"'i\
+    \ \ \ \ * ['"$( echo $dir )"']('"$( echo /$dir/index.md)"')\
+    ' $summary
+
     for f in $PATH_BUILD/$dir/*.md; do
       echo "File Found: $f [on line #$line]"
       let line+=1
