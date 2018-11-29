@@ -9,6 +9,8 @@ PATH_BUILD=${3-"$ABS_PATH/tmp"}
 
 PATH_OUTPUT="docs"
 
+PATH_STATIC="$ABS_PATH/docs"
+
 # if [ -z "$_VERSION_MANUAL" ]; then
   _VERSION=$(git describe --abbrev=0 --tags)
   VERSION=${_VERSION:1}
@@ -45,8 +47,6 @@ node .docs/versions.js -p $PATH_OUTPUT/history
 #   echo "Something went wrong while checking out the version."
 #   exit
 # }
-
-PATH_STATIC="$ABS_PATH/docs"
 
 if [ -d "$PATH_BUILD" ]; then
   ## copy static files into gitbook before
@@ -115,6 +115,7 @@ cp -R $PATH_CONFIG/theme/images $PATH_BUILD/gitbook/images
 #copy images into new build directory
 
 if [ -d "$PATH_STATIC" ]; then
+  echo "Static Directory found."
 #Add files to summary
   line=1
   summary="$PATH_BUILD/SUMMARY.md"
@@ -126,8 +127,12 @@ if [ -d "$PATH_STATIC" ]; then
 
   for d in $PATH_STATIC/
   do
-    echo "* [$d]()"
+    '1i\
+    * [$d]()\
+    '
+    echo "Directory Found: $d"
     for f in $PATH_STATIC/$d/*; do
+      echo "File Found: $f"
       let line+=1
       filename=$(echo ${f##/*/})
       prettyname=${filename//-/$'\n'}
@@ -137,7 +142,7 @@ if [ -d "$PATH_STATIC" ]; then
       ' $summary
     done
   done
-  
+
   sed -i.bak ''"$line"'i\
   ' $summary
 fi
