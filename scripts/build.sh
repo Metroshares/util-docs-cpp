@@ -113,7 +113,7 @@ if [ -d "$PATH_STATIC" ]; then
     else
       cat "# $(echo ${d##/*/})" > $PATH_STATIC/${d##/*/}/index.md
     fi
-    for f in $bd/*; do
+    for f in $d/*; do
       let line+=1
       echo "File Found: $f"
       let line+=1
