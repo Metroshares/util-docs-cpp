@@ -108,7 +108,7 @@ if [ -d "$PATH_STATIC" ]; then
   ' $summary
 
   let line+=2
-  for d in $PATH_STATIC/
+  for d in $PATH_STATIC/*
   do
     echo "Directory Found: $d"
     for f in $PATH_STATIC/$d/*; do
