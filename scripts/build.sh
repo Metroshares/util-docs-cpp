@@ -57,6 +57,10 @@ fi
 mkdir $PATH_BUILD
 mkdir $PATH_BUILD/gitbook
 
+cp SUMMARY.md $PATH_BUILD/gitbook/SUMMARY.md
+cp README.md $PATH_BUILD/gitbook/README.md
+cp LICENSE.md $PATH_BUILD/gitbook/LICENSE.md
+
 {
   doxygen
 } || {
@@ -85,18 +89,18 @@ if [ "$PY_VER_MAJOR" != "3" ]; then
   PY_VENV=true
 fi
 
-doxybook -i $PATH_BUILD/xml -o $PATH_BUILD/gitbook -s SUMMARY.md -t gitbook
+doxybook -i $PATH_BUILD/xml -o $PATH_BUILD/gitbook -s $PATH_BUILD/gitbook/SUMMARY.md -t gitbook
 
 if $PY_VENV; then
   echo "Deactivating python3 virtual environment."
   deactivate
 fi
 
-if [ -d "$PATH_STATIC" ]; then
+if [ -d "$PATH_BUILD/gitbook/" ]; then
   echo "Static Directory found."
 #Add files to summary
   line=1
-  summary="$ABS_PATH/SUMMARY.md"
+  summary="$PATH_BUILD/gitbook/SUMMARY.md"
 
   sed -i.bak '1i\
   * [Readme]( README.md )\
@@ -115,7 +119,7 @@ if [ -d "$PATH_STATIC" ]; then
     then
       echo "Index exists for directory."
     else
-      echo "# $(echo ${d##/*/})" > $d/index.md
+      echo "# ${d##/*/}" > $PATH_BUILD/${d##/*/}/index.md
     fi
 
     for f in $d/*.md; do
@@ -131,7 +135,7 @@ if [ -d "$PATH_STATIC" ]; then
         continue
       fi
 
-      echo "* [$prettyname]($f)" >> $d/index.md
+      echo "* [$prettyname]($f)" >> $PATH_BUILD/${d##/*/}/index.md
 
       sed -i.bak ''"$line"'i\
         * ['"$( echo $prettyname )"']('"$( echo $d/${f##/*/})"')\
@@ -144,10 +148,6 @@ if [ -d "$PATH_STATIC" ]; then
 
   cp -R $PATH_STATIC/. $PATH_BUILD/static
 fi
-
-cp SUMMARY.md $PATH_BUILD/gitbook/SUMMARY.md
-cp README.md $PATH_BUILD/gitbook/README.md
-cp LICENSE.md $PATH_BUILD/gitbook/LICENSE.md
 
 node .docs/config.js
 
