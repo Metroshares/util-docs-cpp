@@ -121,10 +121,9 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
 
     echo "Directory Found: $dir -> $d"
 
-    mkdir $PATH_BUILD/$dir/
-    cp -a $PATH_STATIC/$dir/. $PATH_BUILD/gitbook/$dir/
+    mkdir $PATH_BUILD/gitbook/$dir/
 
-    echo "# $dir" > $PATH_BUILD/$dir/index.md
+    echo "# $dir" > $PATH_BUILD/gitbook/$dir/index.md
 
     let line+=1
     sed -i.bak ''"$line"'i\
@@ -140,13 +139,14 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
 
       if [ "$filename" != "index.md" ]
       then
-        echo "* [$prettyname]($f)" >> $PATH_BUILD/$dir/index.md
+        echo "* [$prettyname]($f)" >> $PATH_BUILD/gitbook/$dir/index.md
 
         let line+=1
         sed -i.bak ''"$line"'i\
         \ \ \ \ * ['"$( echo $prettyname )"']('"$( echo /$dir/$filename)"')\
         ' $summary
       fi
+
     done
   done
 
