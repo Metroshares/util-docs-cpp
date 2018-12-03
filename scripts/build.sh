@@ -11,12 +11,8 @@ PATH_OUTPUT="docs"
 
 PATH_STATIC="$ABS_PATH/docs"
 
-# if [ -z "$_VERSION_MANUAL" ]; then
-  _VERSION=$(git describe --abbrev=0 --tags)
-  VERSION=${_VERSION:1}
-# else
-  # VERSION=$_VERSION_MANUAL
-# fi;
+_VERSION=$(git describe --abbrev=0 --tags)
+VERSION=${_VERSION:1}
 
 echo "VERSION: $VERSION"
 
@@ -104,11 +100,6 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
   line=3
   summary="$PATH_BUILD/gitbook/SUMMARY.md"
 
-  let line+=1
-  sed -i.bak ''"$line"'i\
-  * [License]( LICENSE.md )\
-  ' $summary
-
   for d in $PATH_STATIC/*
   do
     dir=$(echo ${d##/*/})
@@ -150,8 +141,13 @@ if [ -d "$PATH_BUILD/gitbook/" ]; then
     done
   done
 
-  sed -i.bak ''"$line"'i\
-  ' $summary
+  if [ -e LICENSE.md ]
+  then
+    let line+=1
+    sed -i.bak ''"$line"'i\
+    * [License]( LICENSE.md )\
+    ' $summary
+  fi
 fi
 
 node .docs/config.js
